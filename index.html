@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>my calculator</title>
+</head>
+<body>
+    
+</body>
+
+    <h1>Calculator</h1>
+
+    <p>First Number:</p>
+    <input type="number" id="num1">
+
+    <p>Second Number:</p>
+    <input type="number" id="num2">
+
+    <br><br>
+
+    <button onclick="performOperation('add')">Add</button>
+    <button onclick="performOperation('subtract')">Subtract</button>
+    <button onclick="performOperation('multiply')">Multiply</button>
+    <button onclick="performOperation('divide')">Divide</button>
+
+    <h3>Result:</h3>
+    <p id="result"></p>
+
+    <h3>History:</h3>
+    <ul id="historyList"></ul>
+
+    <script src="calculator.js"></script>
+
+    <script>
+        function performOperation(op) {
+            let a = Number(document.getElementById("num1").value);
+            let b = Number(document.getElementById("num2").value);
+
+            let r;
+
+            if (op === "add") r = add(a, b);
+            if (op === "subtract") r = subtract(a, b);
+            if (op === "multiply") r = multiply(a, b);
+            if (op === "divide") r = divide(a, b);
+
+            document.getElementById("result").textContent = r;
+
+            updateHistoryUI();
+        }
+
+        function updateHistoryUI() {
+            let list = document.getElementById("historyList");
+            list.innerHTML = "";
+
+            history.forEach(function(entry) {
+                let item = document.createElement("li");
+                item.textContent = entry.operand1 + " " +
+                                   entry.operator + " " +
+                                   entry.operand2 + " = " +
+                                   entry.result;
+                list.appendChild(item);
+            });
+        }
+    </script>
+
+</body>
+</html>
